@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://unpkg.com/vue"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="app" class="container-fluid">
+    <div class="row" :class="{showQuiz: showQuiz}">
+
+      <div class="col-sm-2 left-bar">
+        <a class="logo"></a>
+        <ul class="list">
+          <template v-for="video, i in videos">
+          <li class="list-item" :class="{completed: video.completed, 'in-progress': video.inProgress}">
+            <a v-on:click="selectVideo(video)" :title="video.completed ? 'Finished' : 'In Progress'">{{video.title}}</a>
+          </li>
+          </template>
+        </ul>
+      </div>
+
+      <div class="col-sm-8 playercol content-area">
+        <div class="intro" v-if="showIntro">
+            <h2>{{currentVideo.title}}</h2>
+            <p>{{currentVideo.description}}</p>
+            <button class="btn btn-primary btn-large" v-on:click="startVideo">Get Started!</button>
+        </div>
+        <div class="completedPage" v-if="allComplete">
+          <h2>Success!</h2>
+          <h3>You have successfully completed Edmodo's educator course.</h3>
+          <p>Congratulations. Hopefully you are excited to put your newly found knowledge to work in the classroom. Keep your eyes peeled for the "Educator" badge in your profile soon.</p>
+          <h4>Want to Brag?</h4>
+          <p>Want to show off your new skills? Enter the emails of colleagues or friends and we'll spread the word!</p>
+          <template v-for="email in emailAddresses">
+            <input type="text" v-model="email.value" v-on:keyup="expandEmails" />
+          </template>
+          <button v-on:click="shareEmails">Share Now</button>
+        </div>
+
+        <div class="player-wrapper" v-if="showPlayer">
+          <div class="progressbar">
+            <div class="inner-progressbar" :style="{width: percentComplete}"></div>
+            <div class="progressbar-text">{{correctAnswers}} / {{currentVideo.questions.length}}</div>
+          </div>
+          <div id="player"></div>
+        </div>
+
+
+      </div>
+
+      <div v-show="showQuiz" id="quiz" class="col-sm-3 quizcol">
+        <div>
+          <h2>{{selectedQuestion.text}}</h2>
+          <form>
+            <div v-for="answer, i in selectedQuestion.answers"  class="form-check">
+              <label class="form-check-label" :for="i">
+                  <input type="radio" :id="i" name="answer" v-model="selectedAnswer" :value="i" class="form-check-input" />
+                  {{answer}}
+              </label>
+            </div>
+          </form>
+          <button class="btn btn-primary" v-on:click="submitAnswer" :disabled="showIncorrect">submit</button>
+          <button class="btn" v-on:click="rewatch" v-if="showIncorrect" ><i class="fa fa-redo"></i> &nbsp; Rewatch Section</button>
+          <div class="form-feedback">
+            <div class="alert alert-success" role="alert" v-if="showCorrect">Correct!</div>
+            <div class="alert alert-danger" role="alert" v-if="showIncorrect">Incorrect, please select a different answer </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="quiz.js"></script>
+</body>
+
+</html>

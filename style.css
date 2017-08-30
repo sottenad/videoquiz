@@ -1,0 +1,195 @@
+body{
+    overflow: hidden;
+}
+
+body, html, #app, .row, .playercol, .player-wrapper{
+    height:100%;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.left-bar{
+    background: #f7f7f7;
+}
+
+.content-area{
+    background: #276bb0;
+    padding: 0;
+    box-shadow: 0 0px 4px rgba(0,0,0,.15);
+    border-right: 1px solid #004688;
+    color: white;
+    text-shadow: 0 2px rgba(0,0,0,.25);
+    position: relative;
+}
+
+
+
+.intro, .completedPage{
+    text-align: center;
+    margin:0 30%;
+    padding:20px;
+    border-radius:20px;
+    background: #1b5fa5;
+    border:1px solid #145292;
+    box-shadow: 0 0px 4px rgba(0,0,0,.15);
+    position: absolute;
+    line-height: 2em;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.completedPage p{
+    text-align: left;
+}
+.intro{
+    cursor: pointer;
+}
+
+
+
+.logo{
+    background: url('edmodo_logo.png') no-repeat;
+    width:180px;
+    height: 89px;
+    display:inline-block;
+    margin: 15px auto;
+    position: relative;
+    z-index:9;
+}
+
+.list{
+    list-style-type: none;
+}
+
+.list li{
+    display: block;
+    position: relative;
+    padding: 6px 30px;
+    margin: 4px 0;
+    font-size:16px;   
+}
+
+.list li a{
+    cursor: pointer;
+}
+.list li a:hover{
+    background:#ededed;
+}
+    
+.list li::after{
+    position: absolute;
+    top:12px; 
+    left:0;
+    content: "";
+    width: 9px;
+    height: 9px;
+    background-color: #bdbdbd;
+    border-radius: 9px;
+    box-shadow: 0px 0px 2px 8px #f7f7f7;
+    z-index:99;
+}
+
+.list li.in-progress::after{
+    background-color: #276bb0;
+}
+
+.list li.completed::after{
+    background-color: #479a1a;
+}
+
+.list li.completed::after {
+    animation-duration: 1s;
+    animation-name: slidein;
+    animation-iteration-count: 2;
+    animation-iteration-count: ease-out;
+}
+  
+@keyframes slidein {
+    0% {
+        top:12px; 
+        left:0;
+        width: 9px;
+        height: 9px;
+    } 
+    50% {
+        top:9px; 
+        left:-3px;
+        width: 15px;
+        height: 15px;
+    } 
+    100% {
+        top:12px; 
+        left:0;
+        width: 9px;
+        height: 9px;
+    }
+}
+
+.list::after {
+    z-index: 1;
+    content: "";
+    position: absolute;
+    top: 120px;
+    bottom: 0;
+    left: 59px;    
+    border-left: 1px solid rgba(191, 191, 191, 0.4);
+}
+
+.form-feedback{
+    margin-top:15px;
+}
+.form-feedback .alert{
+    padding:10px 20px;
+}
+
+.progressbar{
+    height: 20px;
+    width:100%;
+    border-bottom: 1px solid #164575;
+    background:#1a5a9a
+}
+
+.inner-progressbar{
+    height: 20px;
+    background: #164575;
+    -webkit-transition: width 1s;
+    transition: width 1s;
+}
+
+.progressbar-text{
+    position: absolute;
+    top:1px;
+    right: 10px;
+    font-size: 14px;
+
+}
+
+iframe {
+    pointer-events: none;
+    height: calc(100% - 20px);
+    width: 100%;
+    overflow:hidden;
+}
+
+.col{
+    -webkit-transition: max-width 1s, flex 0.2s;
+    transition: max-width 0.2s, flex 0.2s;
+}
+
+.playercol{
+    max-width:83.333%;
+    flex:0 0 83.333%;
+}
+.showQuiz .playercol{
+    max-width:66.666%;
+    flex:0 0 66.666%;
+}
+
+.quizcol{
+    max-width: 0;
+    flex:0 0 0;
+    background: #efefef;
+    padding:30px 15px;
+}
+.showQuiz .quizcol{
+    max-width: 16.333%;
+    flex:0 0 16.333%;
+}
