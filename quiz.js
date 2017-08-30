@@ -22,7 +22,7 @@ var app = new Vue({
         videos: [
             {
                 title: 'Introduction to Edmodo',
-                description: 'Today, we\'ll guide you through the basics of using Edmodo to help administer your classroom and make life easier. Watch the introduction below before we get started exploring features.',
+                description: 'Today, we\'lllll guide you through the basics of using Edmodo to help administer your classroom and make life easier. Watch the introduction below before we get started exploring features.',
                 //videoId: '-n7E2iyWRG8',
                 videoId: 'iZK6si8bcKE',
                 completed: false,
